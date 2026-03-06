@@ -1,0 +1,313 @@
+.heroContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--background);
+}
+
+.videoWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.heroVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 1s ease-in-out;
+}
+
+.videoFadeOut {
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+}
+
+/* --- Slider Styles --- */
+
+.sliderWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+}
+
+.sliderVisible {
+    opacity: 1;
+}
+
+.slide {
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slideActive {
+    opacity: 1;
+}
+
+.sliderControls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.slideDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.slideDotActive {
+    background: white;
+    border-color: white;
+}
+
+.heroOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.heroContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* 
+   BASE LOGO & TAGLINE STYLES
+   Absolutely centered via top/left 50%
+*/
+.logo,
+.tagline {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    opacity: 0;
+    /* initial state: slightly below center */
+    transform: translate(-50%, calc(-50% + 40px));
+    /* Transitions: strictly using transform and opacity for GPU acceleration */
+    transition:
+        transform 2.2s cubic-bezier(0.76, 0, 0.24, 1),
+        opacity 1.5s cubic-bezier(0.76, 0, 0.24, 1);
+    will-change: transform, opacity;
+}
+
+.logo {
+    width: 100%;
+    max-width: 225px;
+    height: auto;
+    object-fit: contain;
+}
+
+.tagline {
+    width: 100%;
+    max-width: 375px;
+    height: auto;
+    object-fit: contain;
+    /* Space below the center for the tagline */
+    margin-top: 5.5rem;
+}
+
+/* 1. ENTRANCE: Smooth glide into the absolute center */
+.entered {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
+
+/* 2. OUTRO: High-precision glide to header using calcs */
+.logoEnding {
+    /* 
+       Logic: 
+       - Origin is at 50vh (center)
+       - Target is at 50px (header center)
+       - Delta is (50px - 50vh)
+       - Maintain -50% self-centering
+    */
+    transform: translate(-50%, calc(-50% + (50px - 50vh))) scale(0.65) !important;
+}
+
+.taglineEnding {
+    opacity: 0 !important;
+    /* Fade out while drifting slightly up for elegance */
+    transform: translate(-50%, -80%) !important;
+}
+
+/* --- Header Navigation Styles --- */
+
+.headerContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3rem;
+    /* Adjusted for tighter horizontal padding per reference */
+    opacity: 0;
+    transition: opacity 2s cubic-bezier(0.76, 0, 0.24, 1);
+    pointer-events: none;
+}
+
+.headerVisible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.navGroup {
+    display: flex;
+    gap: 4rem;
+    /* Slightly more gap */
+    align-items: center;
+}
+
+.navItem {
+    color: white;
+    text-decoration: none;
+    font-size: 10px;
+    /* Smaller font per reference */
+    letter-spacing: 0.2em;
+    /* More spacing */
+    font-weight: 400;
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
+}
+
+.navItem:hover {
+    opacity: 0.5;
+}
+
+.letsTalkBtn {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.6rem 1.6rem;
+    border-radius: 100px;
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.letsTalkBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.plusIcon {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+/* --- Bottom Info Styles --- */
+
+.bottomInfoContainer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3rem;
+    opacity: 0;
+    transition: opacity 2s cubic-bezier(0.76, 0, 0.24, 1);
+    pointer-events: none;
+}
+
+.bottomVisible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.projectMeta {
+    display: flex;
+    gap: 3rem;
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: fadeInText 0.6s ease forwards;
+}
+
+@keyframes fadeInText {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Progress Bar --- */
+
+.progressBarTrack {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.15);
+    z-index: 11;
+}
+
+.progressBarFill {
+    height: 100%;
+    width: 0%;
+    background: white;
+    animation: progressFill 6s linear forwards;
+}
+
+@keyframes progressFill {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+.viewProjectBtn {
+    background: white;
+    color: black;
+    border: none;
+    padding: 0.6rem 1.8rem;
+    border-radius: 100px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.viewProjectBtn:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.02);
+}
