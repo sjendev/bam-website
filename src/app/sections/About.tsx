@@ -17,30 +17,31 @@ export default function About() {
 
             {/* Right — Content */}
             <div className={styles.contentPane}>
-                <span className={styles.eyebrow}>About</span>
+                <h2 className={styles.heading}>
+                    FOR OVER 30 YEARS WE HAVE SUCCESSFULLY DELIVERED INNOVATIVE SOLUTIONS FOR A WIDE VARIETY OF CLIENTS THROUGHOUT SOUTH AFRICA. NOT ONLY DOES THIS SPEAK VOLUMES ABOUT OUR LONGEVITY, BUT AS WELL AS FOR OUR SUSTAINED ABILITY TO PERFORM CREATIVELY AT THE HIGHEST LEVEL OVER THIS PERIOD.
+                </h2>
 
-                <h2 className={styles.name}>Chris<br />BAM</h2>
+                <div className={styles.bodyText}>
+                    <p>
+                        BAM ARCHITECTS ARE DRIVEN BY A PHILOSOPHY OF UNIQUE SOLUTIONS FOR EACH INDIVIDUAL PROJECT, WHICH IS ULTIMATELY CONNECTED TO CONTEXT AND FUNCTION RATHER THAN PRE-DETERMINED STYLISTIC IDEOLOGIES.
+                    </p>
 
-                <p className={styles.title}>Founder &amp; Principal Architect</p>
+                    <p>
+                        WE BELIEVE THAT HIGH QUALITY ARCHITECTURE RESULTS FROM THE CONTINUITY OF THE DESIGN PROCESS AND INTENSIVE DIALOGUE WITH THE CLIENT, PROFESSIONAL TEAM, CONTRACTORS AND END-USERS.
+                    </p>
 
-                <div className={styles.divider} />
+                    <p>
+                        WE CONTINUOUSLY MAKE THE BUSINESS CASE FOR GOOD DESIGN THROUGH THE BELIEF THAT CREATIVITY SHOULDN&apos;T COST MORE.
+                    </p>
 
-                <p className={styles.bio}>
-                    With over three decades of practice, Chris BAM has shaped some of
-                    Southern Africa's most distinctive built environments. His philosophy
-                    is rooted in the belief that architecture is not merely about buildings
-                    — it is about the human experience within them.
-                </p>
+                    <p className={styles.signature}>
+                        CHRISTIAN BAM - PRINCIPAL
+                    </p>
 
-                <p className={styles.bio}>
-                    Founded on the principles of innovation, sustainability, and timeless
-                    design, BAM Architects continues to push the boundaries of what is
-                    possible — creating spaces that are future ready.
-                </p>
-
-                <a href="#" className={styles.contactLink}>
-                    Get in touch <span>→</span>
-                </a>
+                    <a href="#" className={styles.readMoreBtn}>
+                        READ MORE
+                    </a>
+                </div>
             </div>
         </section>
     );

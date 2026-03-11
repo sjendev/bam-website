@@ -10,12 +10,10 @@ import styles from './Projects.module.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
-    { id: 1, name: "Scotchman's", location: 'Cape Town', year: '2022', img: '/slider-1.jpg' },
-    { id: 2, name: 'Park House',  location: 'Johannesburg', year: '2021', img: '/slider-2.jpg' },
-    { id: 3, name: 'Victoria',    location: 'Cape Town', year: '2023', img: '/slider-1.jpg' },
-    { id: 4, name: 'The Meridian',location: 'Durban', year: '2020', img: '/slider-2.jpg' },
-    { id: 5, name: 'Horizon Lofts',location: 'Cape Town', year: '2019', img: '/slider-1.jpg' },
-    { id: 6, name: 'The Edge',    location: 'Tygerfalls', year: '2024', img: '/slider-2.jpg' },
+    { id: 1, name: "78 on Edward", location: 'Cape Town', year: '2022', img: '/projects/BAM-78 on Edward-01.webp' },
+    { id: 2, name: 'MTP', location: 'Johannesburg', year: '2021', img: '/projects/BAM-MTP-01.webp' },
+    { id: 3, name: 'The Edge', location: 'Tygerfalls', year: '2024', img: '/projects/BAM-The Edge-02.webp' },
+    { id: 4, name: 'Panorama Healthcare', location: 'Cape Town', year: '2023', img: '/projects/Panorama Healthcare Building Identity Design.webp' },
 ];
 
 const Projects = () => {

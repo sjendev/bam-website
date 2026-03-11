@@ -41,8 +41,3 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
-.no-scroll,
-.no-scroll body {
-  overflow: hidden !important;
-}

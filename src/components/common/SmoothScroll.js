@@ -19,7 +19,14 @@ export default function SmoothScroll({ children }) {
 
         gsap.ticker.lagSmoothing(0);
 
+        const onLock = () => lenis.stop();
+        const onUnlock = () => lenis.start();
+        window.addEventListener('lenis:lock', onLock);
+        window.addEventListener('lenis:unlock', onUnlock);
+
         return () => {
+            window.removeEventListener('lenis:lock', onLock);
+            window.removeEventListener('lenis:unlock', onUnlock);
             gsap.ticker.remove(lenis.raf);
             lenis.destroy();
         };

@@ -29,6 +29,12 @@ export default function Hero() {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     useEffect(() => {
+        // Disable browser scroll restoration so refresh always starts at top
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
         const entranceTimer = setTimeout(() => {
             setHasEntered(true);
         }, 1000);
@@ -36,71 +42,44 @@ export default function Hero() {
         const video = videoRef.current;
         if (!video) return;
 
-        let animationFrameId: number;
+        const enableLock = () => {
+            window.dispatchEvent(new Event('lenis:lock'));
+        };
 
-        const handleTimeUpdate = () => {
+        const disableLock = () => {
+            window.dispatchEvent(new Event('lenis:unlock'));
+        };
+
+        // Native timeupdate fires while playing — unaffected by pause/resume cycles.
+        // Remove itself once isEnding is set to avoid repeated state updates.
+        const onTimeUpdate = () => {
             if (video.duration && video.currentTime > 0) {
                 const timeLeft = video.duration - video.currentTime;
                 if (timeLeft <= 2.0) {
                     setIsEnding(true);
+                    disableLock();    // Unlock scroll as soon as header appears
+                    video.removeEventListener('timeupdate', onTimeUpdate);
                 }
             }
-            animationFrameId = requestAnimationFrame(handleTimeUpdate);
-        };
-
-        const preventDefault = (e: Event) => {
-            e.preventDefault();
-        };
-
-        const preventScrollKeys = (e: KeyboardEvent) => {
-            const keys = ['ArrowUp', 'ArrowDown', 'Space', 'PageUp', 'PageDown', 'Home', 'End'];
-            if (keys.includes(e.code)) {
-                e.preventDefault();
-                return false;
-            }
-        };
-
-        const enableLock = () => {
-            document.documentElement.classList.add('no-scroll');
-            window.addEventListener('wheel', preventDefault, { passive: false });
-            window.addEventListener('touchmove', preventDefault, { passive: false });
-            window.addEventListener('keydown', preventScrollKeys, { capture: true });
-        };
-
-        const disableLock = () => {
-            document.documentElement.classList.remove('no-scroll');
-            window.removeEventListener('wheel', preventDefault);
-            window.removeEventListener('touchmove', preventDefault);
-            window.removeEventListener('keydown', preventScrollKeys, { capture: true });
-        };
-
-        const onPlay = () => {
-            if (video.ended) return;
-            animationFrameId = requestAnimationFrame(handleTimeUpdate);
-            enableLock();
-        };
-
-        const onPause = () => {
-            cancelAnimationFrame(animationFrameId);
         };
 
         const onEnded = () => {
-            disableLock();
+            setIsEnding(true);  // Fallback: ensure exit animation fires
+            disableLock();      // Fallback: ensure scroll unlocked
             setVideoEnded(true);
-            ScrollTrigger.refresh();
         };
 
-        video.addEventListener('play', onPlay);
-        video.addEventListener('pause', onPause);
+        video.addEventListener('timeupdate', onTimeUpdate);
         video.addEventListener('ended', onEnded);
 
-        enableLock();
+        // Defer so SmoothScroll's useEffect (ancestor) has time to register
+        // the lenis:lock listener before we dispatch it.
+        const lockTimer = setTimeout(enableLock, 100);
 
         return () => {
             clearTimeout(entranceTimer);
-            cancelAnimationFrame(animationFrameId);
-            video.removeEventListener('play', onPlay);
-            video.removeEventListener('pause', onPause);
+            clearTimeout(lockTimer);
+            video.removeEventListener('timeupdate', onTimeUpdate);
             video.removeEventListener('ended', onEnded);
             disableLock();
         };
@@ -121,10 +100,10 @@ export default function Hero() {
         ${isEnding ? styles.logoEnding : ''}
     `.trim();
 
-    const taglineClass = `
-        ${styles.tagline}
-        ${hasEntered ? styles.entered : ''}
-        ${isEnding ? styles.taglineEnding : ''}
+    const wordClass = `
+        ${styles.taglineWord}
+        ${hasEntered ? styles.taglineWordEntered : ''}
+        ${isEnding ? styles.taglineWordEnding : ''}
     `.trim();
 
     return (
@@ -196,30 +175,9 @@ export default function Hero() {
                     priority
                 />
 
-                <div className={taglineClass}>
-                    <svg
-                        viewBox="0 0 600 100"
-                        width="100%"
-                        height="100%"
-                        style={{ overflow: 'visible' }}
-                    >
-                        <text
-                            x="50%"
-                            y="50%"
-                            dominantBaseline="middle"
-                            textAnchor="middle"
-                            fill="white"
-                            style={{
-                                fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
-                                fontWeight: 400,
-                                fontSize: '48px',
-                                letterSpacing: '0.35em',
-                                textTransform: 'uppercase'
-                            }}
-                        >
-                            Future Ready
-                        </text>
-                    </svg>
+                <div className={styles.tagline}>
+                    <span className={wordClass}>Future</span>
+                    <span className={wordClass}>Ready</span>
                 </div>
             </div>
         </section>

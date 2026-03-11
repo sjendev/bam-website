@@ -66,8 +66,16 @@
     font-size: 14px;
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.6);
-    max-width: 440px;
+    max-width: 450px;
     margin-bottom: 1.5rem;
+}
+
+.bioSignature {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
 }
 
 .contactLink {
@@ -88,4 +96,55 @@
 .contactLink:hover {
     border-color: white;
     color: white;
+}
+
+.heading {
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    font-weight: 400;
+    color: #ffffff;
+    text-transform: uppercase;
+    line-height: 1.7;
+    letter-spacing: 0.06em;
+    margin-bottom: 3rem;
+}
+
+.bodyText {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.bodyText p {
+    font-size: clamp(0.7rem, 0.85vw, 0.85rem);
+    line-height: 1.9;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.55);
+    text-transform: uppercase;
+}
+
+.signature {
+    font-size: clamp(0.7rem, 0.85vw, 0.85rem);
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+}
+
+.readMoreBtn {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    padding-bottom: 0.25rem;
+    transition: border-color 0.3s ease, opacity 0.3s ease;
+    width: fit-content;
+}
+
+.readMoreBtn:hover {
+    border-color: #ffffff;
+    opacity: 0.8;
 }

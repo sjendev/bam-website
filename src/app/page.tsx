@@ -1,7 +1,7 @@
-import Hero from './sections/Hero'
-import PinnedTextReveal from './sections/PinnedTextReveal'
-import Projects from './sections/Projects'
-import About from './sections/About'
+import Hero from './sections/Hero';
+import PinnedTextReveal from './sections/PinnedTextReveal';
+import Projects from './sections/Projects';
+import About from './sections/About';
 
 export default function Home() {
     return (
@@ -11,5 +11,5 @@ export default function Home() {
             <Projects />
             <About />
         </main>
-    )
+    );
 }

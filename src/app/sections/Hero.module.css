@@ -97,63 +97,76 @@
     pointer-events: none;
 }
 
-/* 
-   BASE LOGO & TAGLINE STYLES
+/*
+   BASE LOGO STYLES
    Absolutely centered via top/left 50%
 */
-.logo,
-.tagline {
+.logo {
     position: absolute;
     left: 50%;
     top: 50%;
-    opacity: 0;
-    /* initial state: slightly below center */
-    transform: translate(-50%, calc(-50% + 40px));
-    /* Transitions: strictly using transform and opacity for GPU acceleration */
-    transition:
-        transform 2.2s cubic-bezier(0.76, 0, 0.24, 1),
-        opacity 1.5s cubic-bezier(0.76, 0, 0.24, 1);
-    will-change: transform, opacity;
-}
-
-.logo {
     width: 100%;
     max-width: 225px;
     height: auto;
     object-fit: contain;
-}
-
-.tagline {
-    width: 100%;
-    max-width: 375px;
-    height: auto;
-    object-fit: contain;
-    /* Space below the center for the tagline */
-    margin-top: 5.5rem;
-}
-
-/* 1. ENTRANCE: Smooth glide into the absolute center */
-.entered {
-    opacity: 1;
     transform: translate(-50%, -50%);
+    clip-path: inset(0 100% 0 0);
+    will-change: transform, clip-path;
+    transition:
+        clip-path 1s cubic-bezier(0.76, 0, 0.24, 1),
+        transform 2.2s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-/* 2. OUTRO: High-precision glide to header using calcs */
+/* Tagline: positioning container only, no clip-path */
+.tagline {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 5.5rem;
+    display: flex;
+    gap: 0.6em;
+    justify-content: center;
+    align-items: baseline;
+}
+
+/* Each word has its own independent clip-path mask */
+.taglineWord {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 1.875rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: white;
+    display: inline-block;
+    clip-path: inset(0 100% 0 0);
+    will-change: clip-path;
+    transition: clip-path 1s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* 1. ENTRANCE: mask reveal left to right (logo + each word independently) */
+.entered {
+    clip-path: inset(0 0% 0 0);
+}
+
+.taglineWordEntered {
+    clip-path: inset(0 0% 0 0);
+}
+
+/* 2. OUTRO: logo glides to header, words clip out right to left */
 .logoEnding {
-    /* 
-       Logic: 
+    /*
+       Logic:
        - Origin is at 50vh (center)
        - Target is at 50px (header center)
        - Delta is (50px - 50vh)
        - Maintain -50% self-centering
     */
-    transform: translate(-50%, calc(-50% + (50px - 50vh))) scale(0.65) !important;
+    transform: translate(-50%, calc(-50% + (50px - 50vh))) scale(0.65);
 }
 
-.taglineEnding {
-    opacity: 0 !important;
-    /* Fade out while drifting slightly up for elegance */
-    transform: translate(-50%, -80%) !important;
+.taglineWordEnding {
+    clip-path: inset(0 100% 0 0);
 }
 
 /* --- Header Navigation Styles --- */
