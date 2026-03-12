@@ -14,6 +14,8 @@ const projects = [
     { id: 2, name: 'MTP', location: 'Johannesburg', year: '2021', img: '/projects/BAM-MTP-01.webp' },
     { id: 3, name: 'The Edge', location: 'Tygerfalls', year: '2024', img: '/projects/BAM-The Edge-02.webp' },
     { id: 4, name: 'Panorama Healthcare', location: 'Cape Town', year: '2023', img: '/projects/Panorama Healthcare Building Identity Design.webp' },
+    { id: 5, name: 'Residential Estate', location: 'Cape Town', year: '2024', img: '/projects/Residential-Estate.png' },
+    { id: 6, name: 'Residential Estate 2', location: 'Cape Town', year: '2024', img: '/projects/Residential-Estate-2.png' },
 ];
 
 const Projects = () => {

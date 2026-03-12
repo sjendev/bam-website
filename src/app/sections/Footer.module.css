@@ -1,0 +1,158 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    background: #1a1a1a;
+    overflow: hidden;
+    padding: 7rem 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70vh;
+}
+
+/* Giant BAM background text */
+.bgText {
+    position: absolute;
+    bottom: -0.15em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(18rem, 30vw, 38rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.06);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+    z-index: 0;
+}
+
+/* Top row */
+.topRow {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 4rem;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.brandLogo {
+    height: clamp(4rem, 8vw, 7.5rem);
+    width: auto;
+    object-fit: contain;
+    object-position: left center;
+}
+
+/* Nav columns */
+.navColumns {
+    display: flex;
+    gap: 5rem;
+}
+
+.navColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.navLabel {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 0.25rem;
+}
+
+.navLink {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.25s ease;
+    cursor: pointer;
+}
+
+.navLink:hover {
+    color: #ffffff;
+}
+
+/* Bottom row */
+.bottomRow {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.copyright {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.location {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.socialLinks {
+    display: flex;
+    gap: 2rem;
+}
+
+.socialLink {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    text-decoration: none;
+    transition: color 0.25s ease;
+    cursor: pointer;
+}
+
+.socialLink:hover {
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 5rem 2rem 3rem;
+        height: auto;
+        min-height: 70vh;
+    }
+
+    .topRow {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .navColumns {
+        gap: 3rem;
+    }
+
+    .bottomRow {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+}

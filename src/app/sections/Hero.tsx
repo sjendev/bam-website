@@ -8,6 +8,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+if (typeof window !== 'undefined') {
+    history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+}
+
 const sliderImages = [
     { src: '/slider-1.jpg', alt: 'BAM Architects Project 1' },
     { src: '/slider-2.jpg', alt: 'BAM Architects Project 2' },
@@ -140,16 +145,15 @@ export default function Hero() {
 
             <header className={`${styles.headerContainer} ${isEnding ? styles.headerVisible : ''}`}>
                 <nav className={styles.navGroup}>
+                    <a href="#" className={styles.navItem}>Home</a>
                     <a href="#" className={styles.navItem}>Projects</a>
-                    <a href="#" className={styles.navItem}>Services</a>
-                    <a href="#" className={styles.navItem}>Contact</a>
                 </nav>
 
                 <div style={{ width: '150px' }}></div>
 
                 <div className={styles.navGroup}>
-                    <a href="#" className={styles.navItem}>About</a>
-                    <a href="#" className={styles.navItem}>Career</a>
+                    <a href="#" className={styles.navItem}>Media</a>
+                    <a href="#" className={styles.navItem}>Contact</a>
                     <button className={styles.letsTalkBtn}>
                         Let's Talk <span className={styles.plusIcon}>+</span>
                     </button>
