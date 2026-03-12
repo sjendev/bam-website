@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,12 +11,12 @@ import styles from './Projects.module.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
-    { id: 1, name: "78 on Edward", location: 'Cape Town', year: '2022', img: '/projects/BAM-78 on Edward-01.webp' },
-    { id: 2, name: 'MTP', location: 'Johannesburg', year: '2021', img: '/projects/BAM-MTP-01.webp' },
-    { id: 3, name: 'The Edge', location: 'Tygerfalls', year: '2024', img: '/projects/BAM-The Edge-02.webp' },
-    { id: 4, name: 'Panorama Healthcare', location: 'Cape Town', year: '2023', img: '/projects/Panorama Healthcare Building Identity Design.webp' },
-    { id: 5, name: 'Residential Estate', location: 'Cape Town', year: '2024', img: '/projects/Residential-Estate.png' },
-    { id: 6, name: 'Residential Estate 2', location: 'Cape Town', year: '2024', img: '/projects/Residential-Estate-2.png' },
+    { id: 1, name: "78 on Edward", location: 'Cape Town', year: '2022', img: '/projects/BAM-78 on Edward-01.webp', href: null },
+    { id: 2, name: 'MTP', location: 'Johannesburg', year: '2021', img: '/projects/BAM-MTP-01.webp', href: null },
+    { id: 3, name: 'The Edge', location: 'Tygerfalls', year: '2024', img: '/projects/BAM-The Edge-02.webp', href: '/projects/the-edge' },
+    { id: 4, name: 'Panorama Healthcare', location: 'Cape Town', year: '2023', img: '/projects/Panorama Healthcare Building Identity Design.webp', href: null },
+    { id: 5, name: 'Residential Estate', location: 'Cape Town', year: '2024', img: '/projects/Residential-Estate.png', href: null },
+    { id: 6, name: 'Residential Estate 2', location: 'Cape Town', year: '2024', img: '/projects/Residential-Estate-2.png', href: null },
 ];
 
 const Projects = () => {
@@ -53,24 +54,29 @@ const Projects = () => {
 
             <div className={styles.trackContainer}>
                 <div ref={trackRef} className={styles.track}>
-                    {projects.map((project, i) => (
-                        <div key={project.id} className={styles.card}>
-                            <div className={styles.cardHeader}>
-                                <span className={styles.cardIndex}>0{i + 1}</span>
-                                <span className={styles.cardName}>{project.name}</span>
-                                <span className={styles.cardLocation}>{project.location}</span>
-                            </div>
-                            <div className={styles.cardImage}>
-                                <Image
-                                    src={project.img}
-                                    alt={project.name}
-                                    fill
-                                    className={styles.cardImg}
-                                    sizes="35vw"
-                                />
-                            </div>
-                        </div>
-                    ))}
+                    {projects.map((project, i) => {
+                        const CardWrapper = project.href
+                            ? ({ children }: { children: React.ReactNode }) => <Link href={project.href!} className={styles.card}>{children}</Link>
+                            : ({ children }: { children: React.ReactNode }) => <div className={styles.card}>{children}</div>;
+                        return (
+                            <CardWrapper key={project.id}>
+                                <div className={styles.cardHeader}>
+                                    <span className={styles.cardIndex}>0{i + 1}</span>
+                                    <span className={styles.cardName}>{project.name}</span>
+                                    <span className={styles.cardLocation}>{project.location}</span>
+                                </div>
+                                <div className={styles.cardImage}>
+                                    <Image
+                                        src={project.img}
+                                        alt={project.name}
+                                        fill
+                                        className={styles.cardImg}
+                                        sizes="35vw"
+                                    />
+                                </div>
+                            </CardWrapper>
+                        );
+                    })}
                 </div>
             </div>
         </section>

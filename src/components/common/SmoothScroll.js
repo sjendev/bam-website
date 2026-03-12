@@ -19,6 +19,11 @@ export default function SmoothScroll({ children }) {
 
         gsap.ticker.lagSmoothing(0);
 
+        // When GSAP adds/removes pin spacers it changes page height —
+        // tell Lenis to recalculate its scroll limits so it doesn't stop early.
+        ScrollTrigger.addEventListener('refresh', () => lenis.resize());
+        ScrollTrigger.refresh();
+
         const onLock = () => lenis.stop();
         const onUnlock = () => lenis.start();
         window.addEventListener('lenis:lock', onLock);
@@ -27,6 +32,7 @@ export default function SmoothScroll({ children }) {
         return () => {
             window.removeEventListener('lenis:lock', onLock);
             window.removeEventListener('lenis:unlock', onUnlock);
+            ScrollTrigger.removeEventListener('refresh', () => lenis.resize());
             gsap.ticker.remove(lenis.raf);
             lenis.destroy();
         };

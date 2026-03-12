@@ -7,15 +7,15 @@ import Footer from './sections/Footer';
 export default function Home() {
     return (
         <>
-            {/* Sections sit above the fixed footer (z-index: 1 vs footer z-index: 0) */}
-            <main style={{ position: 'relative', zIndex: 1 }}>
+            <main style={{ position: 'relative', zIndex: 1, background: '#0a0a0a' }}>
                 <Hero />
                 <PinnedTextReveal />
                 <Projects />
                 <About />
-                {/* Spacer creates scroll distance to reveal the fixed footer */}
-                <div id="footer-spacer" style={{ height: '70vh' }} />
             </main>
+            {/* Transparent spacer: z-index 1 sits above the fixed footer (z-index 0)
+                but has no background, so the footer shows through it as you scroll */}
+            <div style={{ height: '70vh', position: 'relative', zIndex: 1 }} />
             <Footer />
         </>
     );
