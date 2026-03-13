@@ -15,9 +15,13 @@ export default function TheEdgePage() {
     const galleryRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
-        // Ensure we start at the top and ScrollTrigger positions are correct.
-        // Two passes: rAF covers first paint, timeout covers late-loading images.
-        window.scrollTo(0, 0);
+        // Reset Lenis (persists across navigations in layout) then native scroll.
+        const lenis = (window as typeof window & { __lenis?: { scrollTo: (target: number, opts: object) => void } }).__lenis;
+        if (lenis) {
+            lenis.scrollTo(0, { immediate: true });
+        } else {
+            window.scrollTo(0, 0);
+        }
         requestAnimationFrame(() => ScrollTrigger.refresh());
         const id = setTimeout(() => ScrollTrigger.refresh(), 300);
         return () => clearTimeout(id);
@@ -67,13 +71,15 @@ export default function TheEdgePage() {
                         <Link href="/#projects" className={styles.navItem}>Projects</Link>
                     </nav>
 
-                    <Image
-                        src="/logo.png"
-                        alt="BAM Architects"
-                        width={160}
-                        height={80}
-                        className={styles.logo}
-                    />
+                    <Link href="/">
+                        <Image
+                            src="/logo.png"
+                            alt="BAM Architects"
+                            width={160}
+                            height={80}
+                            className={styles.logo}
+                        />
+                    </Link>
 
                     <nav className={styles.navGroup}>
                         <a href="#" className={styles.navItem}>Media</a>

@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './Hero.module.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -176,14 +177,16 @@ export default function Hero() {
 
 
             <div className={styles.heroContent}>
-                <Image
-                    src="/logo.png"
-                    alt="BAM Architects Logo"
-                    width={800}
-                    height={400}
-                    className={logoClass}
-                    priority
-                />
+                <Link href="/" className={`${styles.logoLink} ${isEnding ? styles.logoLinkActive : ''}`}>
+                    <Image
+                        src="/logo.png"
+                        alt="BAM Architects Logo"
+                        width={800}
+                        height={400}
+                        className={logoClass}
+                        priority
+                    />
+                </Link>
 
                 <div className={styles.tagline}>
                     <span className={wordClass}>Future</span>

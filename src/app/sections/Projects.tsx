@@ -58,7 +58,12 @@ const Projects = () => {
     return (
         <section ref={sectionRef} className={styles.section}>
             <div className={styles.intro}>
-                <span className={styles.eyebrow}>Our Projects</span>
+                <div className={styles.introTop}>
+                    <span className={styles.eyebrow}>Our Projects</span>
+                    <Link href="/projects" className={styles.viewAllBtn}>
+                        View All Projects <span className={styles.viewAllArrow}>→</span>
+                    </Link>
+                </div>
                 <h2 className={styles.heading}>
                     A Celebration of Innovation, Passion,<br />
                     and Precision, Reflected in Structures,<br />

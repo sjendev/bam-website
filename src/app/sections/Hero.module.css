@@ -101,6 +101,16 @@
    BASE LOGO STYLES
    Absolutely centered via top/left 50%
 */
+.logoLink {
+    pointer-events: none;
+    display: contents;
+}
+
+.logoLinkActive {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
 .logo {
     position: absolute;
     left: 50%;
