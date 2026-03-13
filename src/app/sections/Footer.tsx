@@ -21,8 +21,8 @@ export default function Footer() {
                         <span className={styles.navLabel}>Studio</span>
                         <a className={styles.navLink}>About</a>
                         <a className={styles.navLink}>Projects</a>
-                        <a className={styles.navLink}>Services</a>
-                        <a className={styles.navLink}>Awards</a>
+                        <a className={styles.navLink}>Media</a>
+                        <a className={styles.navLink}>Contact</a>
                     </div>
                     <div className={styles.navColumn}>
                         <span className={styles.navLabel}>Connect</span>

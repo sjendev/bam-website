@@ -21,7 +21,7 @@ const PinnedTextReveal = () => {
             scrollTrigger: {
                 trigger: containerRef.current,
                 start: 'top top',
-                end: '+=150%',
+                end: '+=50%',
                 pin: true,
                 scrub: 1,
                 snap: {
@@ -35,18 +35,16 @@ const PinnedTextReveal = () => {
         });
 
         // Initial state
-        gsap.set([text1Ref.current, text2Ref.current, text3Ref.current], {
-            opacity: 0
-        });
+        gsap.set(text1Ref.current, { opacity: 1 });
+        gsap.set([text2Ref.current, text3Ref.current], { opacity: 0 });
 
         // Timeline steps
-        tl.to(text1Ref.current, { opacity: 1, duration: 0.5 })
-            .addLabel('text1')
-            .to(text1Ref.current, { opacity: 0, duration: 0.3 }, '+=0.2')
-            .to(text2Ref.current, { opacity: 1, duration: 0.5 }, '>+0.2')
+        tl.addLabel('text1')
+            .to(text1Ref.current, { opacity: 0, duration: 0.2 }, '+=0.1')
+            .to(text2Ref.current, { opacity: 1, duration: 0.3 }, '>+0.1')
             .addLabel('text2')
-            .to(text2Ref.current, { opacity: 0, duration: 0.3 }, '+=0.2')
-            .to(text3Ref.current, { opacity: 1, duration: 0.5 }, '>+0.2')
+            .to(text2Ref.current, { opacity: 0, duration: 0.2 }, '+=0.1')
+            .to(text3Ref.current, { opacity: 1, duration: 0.3 }, '>+0.1')
             .addLabel('text3')
             .to({}, { duration: 0.5 }); // Final hold before unpinning
 
@@ -88,6 +86,13 @@ const PinnedTextReveal = () => {
                         WE CALL IT, FUTURE READY
                     </h2>
                 </div>
+            </div>
+
+            {/* Scroll arrow */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-neutral-900 flex items-center justify-center animate-bounce">
+                <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 4v12M4 10l6 6 6-6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
             </div>
         </section>
     );

@@ -14,9 +14,9 @@ const projects = [
     { id: 1, name: "78 on Edward", location: 'Cape Town', year: '2022', img: '/projects/BAM-78 on Edward-01.webp', href: null },
     { id: 2, name: 'MTP', location: 'Johannesburg', year: '2021', img: '/projects/BAM-MTP-01.webp', href: null },
     { id: 3, name: 'The Edge', location: 'Tygerfalls', year: '2024', img: '/projects/BAM-The Edge-02.webp', href: '/projects/the-edge' },
-    { id: 4, name: 'Panorama Healthcare', location: 'Cape Town', year: '2023', img: '/projects/Panorama Healthcare Building Identity Design.webp', href: null },
-    { id: 5, name: 'Residential Estate', location: 'Cape Town', year: '2024', img: '/projects/Residential-Estate.png', href: null },
-    { id: 6, name: 'Residential Estate 2', location: 'Cape Town', year: '2024', img: '/projects/Residential-Estate-2.png', href: null },
+    { id: 4, name: 'Panorama Healthcare Centre', location: 'Cape Town', year: '2023', img: '/projects/Panorama Healthcare Building Identity Design.webp', href: null },
+    { id: 5, name: 'Santam Head Office', location: 'Cape Town', year: '2024', img: '/projects/Residential-Estate.png', href: null },
+    { id: 6, name: 'The Quays Canal Walk', location: 'Cape Town', year: '2024', img: '/projects/Residential-Estate-2.png', href: null },
 ];
 
 const Projects = () => {
@@ -29,13 +29,27 @@ const Projects = () => {
         if (!track || !section) return;
 
         gsap.to(track, {
-            x: () => -(track.scrollWidth - document.documentElement.clientWidth) + 'px',
+            x: () => {
+                const container = track.parentElement!;
+                const style = getComputedStyle(container);
+                const visibleWidth = container.clientWidth
+                    - parseFloat(style.paddingLeft)
+                    - parseFloat(style.paddingRight);
+                return -(track.scrollWidth - visibleWidth) + 'px';
+            },
             ease: 'none',
             scrollTrigger: {
                 trigger: section,
                 pin: true,
                 scrub: 1,
-                end: () => `+=${track.scrollWidth - document.documentElement.clientWidth}`,
+                end: () => {
+                    const container = track.parentElement!;
+                    const style = getComputedStyle(container);
+                    const visibleWidth = container.clientWidth
+                        - parseFloat(style.paddingLeft)
+                        - parseFloat(style.paddingRight);
+                    return `+=${track.scrollWidth - visibleWidth}`;
+                },
                 invalidateOnRefresh: true,
             },
         });
@@ -46,7 +60,7 @@ const Projects = () => {
             <div className={styles.intro}>
                 <span className={styles.eyebrow}>Our Projects</span>
                 <h2 className={styles.heading}>
-                    A Celebration of Innovation, Heritage,<br />
+                    A Celebration of Innovation, Passion,<br />
                     and Precision, Reflected in Structures,<br />
                     Spaces, and Details.
                 </h2>

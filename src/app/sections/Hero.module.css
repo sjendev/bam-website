@@ -324,3 +324,35 @@
     background: rgba(255, 255, 255, 0.8);
     transform: scale(1.02);
 }
+
+/* --- Scroll Arrow --- */
+
+.scrollArrow {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 2s cubic-bezier(0.76, 0, 0.24, 1);
+    pointer-events: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: arrowBob 2s ease-in-out infinite;
+    animation-play-state: paused;
+}
+
+.scrollArrowVisible {
+    opacity: 1;
+    animation-play-state: running;
+}
+
+@keyframes arrowBob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(5px); }
+}
