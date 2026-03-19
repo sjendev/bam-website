@@ -67,8 +67,8 @@ export default function TheEdgePage() {
                 {/* Header */}
                 <header className={styles.header}>
                     <nav className={styles.navGroup}>
-                        <Link href="/" className={styles.navItem}>Home</Link>
                         <Link href="/#projects" className={styles.navItem}>Projects</Link>
+                        <a href="#" className={styles.navItem}>Social Media</a>
                     </nav>
 
                     <Link href="/">
@@ -82,11 +82,8 @@ export default function TheEdgePage() {
                     </Link>
 
                     <nav className={styles.navGroup}>
-                        <a href="#" className={styles.navItem}>Media</a>
+                        <a href="#" className={styles.navItem}>About</a>
                         <a href="#" className={styles.navItem}>Contact</a>
-                        <button className={styles.letsTalkBtn}>
-                            Let's Talk <span className={styles.plus}>+</span>
-                        </button>
                     </nav>
                 </header>
 

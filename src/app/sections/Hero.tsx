@@ -146,18 +146,15 @@ export default function Hero() {
 
             <header className={`${styles.headerContainer} ${isEnding ? styles.headerVisible : ''}`}>
                 <nav className={styles.navGroup}>
-                    <a href="#" className={styles.navItem}>Home</a>
                     <a href="#" className={styles.navItem}>Projects</a>
+                    <a href="#" className={styles.navItem}>Social Media</a>
                 </nav>
 
                 <div style={{ width: '150px' }}></div>
 
                 <div className={styles.navGroup}>
-                    <a href="#" className={styles.navItem}>Media</a>
+                    <a href="#" className={styles.navItem}>About</a>
                     <a href="#" className={styles.navItem}>Contact</a>
-                    <button className={styles.letsTalkBtn}>
-                        Let's Talk <span className={styles.plusIcon}>+</span>
-                    </button>
                 </div>
             </header>
 
@@ -172,7 +169,7 @@ export default function Hero() {
                     <span>{slideData[currentSlide].building}</span>
                     <span>{slideData[currentSlide].location}</span>
                 </div>
-                <button className={styles.viewProjectBtn}>View Project</button>
+                <Link href="/projects/the-edge" className={styles.viewProjectBtn}>View Project</Link>
             </div>
 
 
