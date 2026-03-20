@@ -56,7 +56,7 @@ const Projects = () => {
     }, { scope: sectionRef });
 
     return (
-        <section ref={sectionRef} className={styles.section}>
+        <section ref={sectionRef} className={styles.section} data-section="projects">
             <div className={styles.intro}>
                 <div className={styles.introTop}>
                     <span className={styles.eyebrow}>Our Projects</span>

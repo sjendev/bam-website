@@ -158,11 +158,20 @@ export default function Hero() {
                 </div>
             </header>
 
-            <div className={`${styles.scrollArrow} ${isEnding ? styles.scrollArrowVisible : ''}`}>
+            <button
+                className={`${styles.scrollArrow} ${isEnding ? styles.scrollArrowVisible : ''}`}
+                onClick={() => {
+                    const next = document.querySelector('[data-section="pinned-text-reveal"]') as HTMLElement;
+                    const lenis = (window as typeof window & { __lenis?: { scrollTo: (target: HTMLElement, opts?: object) => void } }).__lenis;
+                    if (lenis && next) lenis.scrollTo(next);
+                    else if (next) next.scrollIntoView({ behavior: 'smooth' });
+                }}
+                aria-label="Scroll to next section"
+            >
                 <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 4v12M4 10l6 6 6-6" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-            </div>
+            </button>
 
             <div className={`${styles.bottomInfoContainer} ${isEnding ? styles.bottomVisible : ''}`}>
                 <div key={currentSlide} className={styles.projectMeta}>

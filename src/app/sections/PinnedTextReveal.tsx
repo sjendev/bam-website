@@ -89,11 +89,20 @@ const PinnedTextReveal = () => {
             </div>
 
             {/* Scroll arrow */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-neutral-900 flex items-center justify-center animate-bounce">
+            <button
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-neutral-900 border-none flex items-center justify-center animate-bounce cursor-pointer"
+                aria-label="Scroll to next section"
+                onClick={() => {
+                    const next = document.querySelector('[data-section="projects"]') as HTMLElement;
+                    const lenis = (window as typeof window & { __lenis?: { scrollTo: (target: HTMLElement, opts?: object) => void } }).__lenis;
+                    if (lenis && next) lenis.scrollTo(next);
+                    else if (next) next.scrollIntoView({ behavior: 'smooth' });
+                }}
+            >
                 <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 4v12M4 10l6 6 6-6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-            </div>
+            </button>
         </section>
     );
 };
